@@ -1,0 +1,65 @@
+{% extends 'index.html' %}
+{% block title %}
+{{ post.titulo }}
+{% endblock title%}
+{%  block content %}
+{%  endblock %}
+
+{% block body %}
+<main>
+    <div class="main">
+      <div class="container">
+        <div class="blog">
+          <h2 class="h2" style="text-align:center;">{{ post.titulo }}</h2>
+              <div class="blog-content-wrapper">
+                <button class="blog-topic text-tiny">{{ post.tema }} </button>
+                
+                <p class="blog-text-texto">
+                  {{ post.contenido | safe }}
+                </p>
+                <br>
+                <div class="img-box-contenedor">
+                  <img src="{{ post.imagen.url }}" alt="Jesus D. Redondo" class="img-box-publicacion">
+                </div>
+                <div class="wrapper-flex">
+                  <div class="wrapper">
+                    <a href="#" class="h4">{{ post.autor_id }} </a>
+                    <h4 class="h4">
+                      {{ post.fecha_publicacion}}
+                    </h4>
+                  </div>
+                </div>
+              </div>
+              
+        </div>
+        
+
+
+
+        <!--
+          - ASIDE
+        -->
+
+        <div class="aside" >
+          <div class="tags">
+           
+            <div class="wrapper">
+              <p>
+                {{ post.frase | safe}}
+              </p>
+              <p>
+                 
+              </p>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+{% endblock %}

@@ -1,0 +1,437 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/e65cd1768b.js" crossorigin="anonymous"></script>
+  <title> {% block title %} Blog Jesus D. Redondo {% endblock %} </title>
+
+  <!--
+    - favicon
+  -->
+  
+  <link rel="shortcut icon" href='{% static  "images/favicon.ico" %}' type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href='{% static "css/style.css" %}'>
+
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  
+  
+</head>
+
+<body class="light-theme">
+
+
+
+  <header>
+
+    <div class="container">
+
+      <nav class="navbar">
+
+        <a href="/">
+           <!--
+    -Aqui debo poner un logo
+  -->
+          <h2 class="h2">Jred0n29</h2>
+        </a>
+
+        <div class="btn-group">
+
+          <button class="theme-btn theme-btn-mobile light">
+            <ion-icon name="moon" class="moon"></ion-icon>
+            <ion-icon name="sunny" class="sun"></ion-icon>
+          </button>
+
+          <button class="nav-menu-btn">
+            <ion-icon name="menu-outline"></ion-icon>
+          </button>
+
+        </div>
+
+        <div class="flex-wrapper">
+
+          <ul class="desktop-nav">
+
+            <li>
+              <a href="/" class="nav-link">Inicio</a>
+            </li>
+
+            <li>
+              <a href="#aboutme" class="nav-link">Acerca de mi</a>
+            </li>
+
+            <li>
+              <a href="#contactame" class="nav-link">Contacto</a>
+            </li>
+
+          </ul>
+
+          <button class="theme-btn theme-btn-desktop light">
+            <ion-icon name="moon" class="moon"></ion-icon>
+            <ion-icon name="sunny" class="sun"></ion-icon>
+          </button>
+
+        </div>
+
+        <div class="mobile-nav">
+
+          <button class="nav-close-btn">
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+
+          <div class="wrapper">
+
+            <p class="h3 nav-title">Menu</p>
+
+            <ul>
+              <li class="nav-item">
+                <a href="/" class="nav-link">Inicio</a>
+              </li>
+
+             
+
+              <li class="nav-item">
+                <a href="#contactame" class="nav-link">Contacto</a>
+              </li>
+            </ul>
+
+          </div>
+
+          <div>
+
+            <!--
+              - # AQUI PUEDE IR UNA SECION
+            -->
+
+          </div>
+
+        </div>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+
+
+
+  <main>
+
+    <!--
+      - #HERO SECTION
+    -->
+  {%  block content %}
+
+    <div class="hero">
+
+      <div class="container">
+
+        <div class="left">
+
+          <h1 class="h1">
+            Hola, mi nombre es <b>Jesus&nbsp;D. Redondo</b>.
+          </h1>
+
+          <p class="h3">
+          En el día estudiante de  <abbr title="Accessibility">ingeniería civil</abbr>
+            en Unisucre &lt;3 y por las noches software developer.
+            
+          </p>
+
+          <div class="btn-group">
+            <a href="#" class="btn btn-primary"> <strong> Proyectos</strong></a>
+            <a href="#publicaciones" class="btn btn-secondary"><strong>Post</strong></a>
+          </div>
+
+        </div>
+
+        <div class="right">
+
+          <div class="pattern-bg"></div>
+          <div class="img-box">
+            <img src="{% static '/images/image.png' %}" alt="Jesus D. Redondo" class="hero-img">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+          </div>
+
+        </div>
+
+      </div>
+      <br>
+      <br>
+      <br>
+    </div>
+
+    {%  endblock %}
+
+{% block body %}
+<main>
+    
+    <div class="main">
+
+      <div class="container">
+
+        <!--
+          - BLOG SECTION
+        -->
+        
+        {% if post %}
+        
+        <div class="blog">
+
+          <h2 class="h2" id="publicaciones">Publicaciones</h2>
+          
+          {% for post in post %}
+          <div class="blog-card-group">
+
+            <div class="blog-card">
+
+              <div class="blog-card-banner">
+                <img src="{{ post.imagen.url }}" alt="Foto del pasado"
+                  width="250" class="blog-banner-img">
+              </div>
+
+              <div class="blog-content-wrapper">
+
+                <button class="blog-topic text-tiny">{{ post.tema }}</button>
+
+                <h3>
+                  <a href="{% url 'publicaciones:publicacion' post.id %} " class="h3">
+                    {{ post.titulo }}
+                  </a>
+                </h3>
+
+                <p class="blog-text">
+                  {{ post.resumen  }}
+                </p>
+
+                <div class="wrapper-flex">
+                  
+                  <div class="wrapper">
+                    <a href="#" class="h4">{{ post.autor_id }} </a>
+
+                    <h4 class="h4">
+                      {{ post.fecha_publicacion}}
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          
+
+        
+
+        </div>
+        {% else %}
+          <div class="blog">
+
+            <h2 class="h2">Publicaciones</h2>
+            <p>No hay publicaciones</p>
+          </div>
+        {% endif %}
+
+
+
+
+        <!--
+          - ASIDE
+        -->
+
+        <div class="aside">
+          <div class="tags">
+            <h2 class="h2">Intereses</h2>
+            <div class="wrapper">
+              <p>
+                Un blog escrito en mis tiempos libres para
+                transmitir mis intereses, conocimientos, 
+                criticas y pensamientos ante diversos temas como:
+              </p>
+
+              <button class="hashtag">Filosofia</button>
+              <button class="hashtag">Educación</button>
+              <button class="hashtag">Politica</button>
+              <button class="hashtag">Cultura</button>
+              <button class="hashtag">Programación</button>
+              <button class="hashtag">Opinión</button>
+              <button class="hashtag">Hobbies</button>
+              
+            </div>
+          </div>
+
+
+          <div class="contact">
+
+            <h2 class="h2" id="aboutme">Acerca de mi</h2>
+
+            <div class="wrapper">
+
+              <p>
+                Soy un joven de 20 años que disfruta aprender cosas nuevas, soy un apasioando por las 
+                matematicas, la programacion y una buena lectura. La mayor parte del tiempo 
+                me encuentro realizando proyectos personales para no aburrirme.
+                Ademas me gusta la naturaleza, el arte, la historia y un buen <strong>café</strong> 
+              </p>
+
+              <ul class="social-link" id>
+
+                <li>
+                  <a href="mailto:jredon439@gmail.com" target="_blank" class="icon-box gmail">
+                    <ion-icon name="mail-outline"></ion-icon>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="https://github.com/Jred0n29" target="_blank" class="icon-box github">
+                    <ion-icon name="logo-github"></ion-icon>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="https://es.stackoverflow.com/users/204513/jred0n29" target="_blank" class="icon-box stackoverflow">
+                    <ion-icon name="logo-stackoverflow"></ion-icon>
+                  </a>
+                </li>
+
+              </ul>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+  {% endblock %}
+
+
+
+
+
+  <!--
+    - #FOOTER
+  -->
+
+  <footer id="contactame">
+
+    <div class="container">
+
+      <div class="wrapper">
+
+        
+
+        <p class="footer-text">
+          <strong>Remember:</strong>
+          <br>
+          Ante cualquier tipo de contratacion, colaboracion, comentarios u opiniones
+          puede acercarse a alguna de mis redes sociales donde una respuesta de mi parte
+          no se hará esperar
+
+        </p>
+      </div>
+
+      <div class="wrapper">
+
+        <p class="footer-title">Contactos: </p>
+
+       
+          <ul class="social-link">
+            <li>
+              <a href="mailto:jredon439@gmail.com" target="_blank" class="icon-box gmail">
+                <ion-icon name="mail-outline"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/Jred0n29" target="_blank" class="icon-box github">
+                <ion-icon name="logo-github"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="https://es.stackoverflow.com/users/204513/jred0n29" target="_blank" class="icon-box stackoverflow">
+                <ion-icon name="logo-stackoverflow"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="https://www.linkedin.com/in/jesus-redondo-a-7707a1207/" target="_blank" class="icon-box linkedin">
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </a>
+            </li>
+
+         
+        </ul>
+
+      </div>
+
+      <div class="wrapper">
+        <p class="footer-title">Herramientas y tecnologias</p>
+        <ul class="herramientas">
+          <li>
+            <img src="https://img.icons8.com/color/48/000000/numpy.png">
+            <img src="https://img.icons8.com/color/48/000000/pandas.png"> 
+            <img src="https://img.icons8.com/dusk/64/000000/python.png"/>
+          </li> 
+          <li>
+            
+            <img src="https://img.icons8.com/color/48/000000/django.png"/>
+            <img src="https://img.icons8.com/ios/50/000000/qt.png"/>
+            <img src="https://img.icons8.com/plasticine/100/000000/bash.png"/>
+          </li>
+          <li>
+            <img src="https://img.icons8.com/color/48/000000/git.png"/>
+            <img src="https://img.icons8.com/color/48/000000/postgreesql.png"/>
+          </li>
+            
+          
+        </ul>
+
+      </div>
+
+    </div>
+
+    <p class="copyright">
+      Con mucho &lt;3 por Jesus Redondo
+    </p>
+
+  </footer>
+
+
+
+
+
+  <!--
+    - custom js link
+  -->
+  <script src="{% static 'js/script.js' %}"></script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
